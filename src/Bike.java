@@ -1,10 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
+
+//bike é filha de veiculo
 public class Bike extends Veiculo {
-    private int espacoAntes;
 
 
-    public Bike(){
+    public Bike(int espacoAntes){
+        //construtor inicializa com 2 rodas
+
         setQuantRodas(2);
         List<Roda> rodas = new ArrayList<>();
 
@@ -13,12 +16,14 @@ public class Bike extends Veiculo {
         }
 
         setRodas(rodas);
+        setEspacoAntes(espacoAntes);
 
     }
 
 
 
     public void mover() {
+        //metodo que move o veiculo
         boolean rodaDescalibrada = false;
 
 
@@ -32,11 +37,13 @@ public class Bike extends Veiculo {
         if (rodaDescalibrada) {
             System.out.println("Não é possível locomover pois a(s) roda(s) não está(ão) calibrada(s)!");
         } else {
-            espacoAntes++; // incrementa
+            int novoEspacoAntes = getEspacoAntes() + 1;
+            setEspacoAntes(novoEspacoAntes); // incrementa
         }
     }
     public String desenhar(){
-        String espacos = "  ".repeat(espacoAntes);//2 em 2 blocos
+        //desenha o veiculo
+        String espacos = "  ".repeat(getEspacoAntes());//2 em 2 blocos
         String bike = " "+
                  "\n "+espacos+"   __o" +
                     " \n"+espacos+" _¬\\ <,_" +
@@ -48,6 +55,7 @@ public class Bike extends Veiculo {
 
     @Override
     public String toString() {
+        //printa as informações do veiculo
         StringBuilder sb = new StringBuilder();
         sb.append("Bicicleta: ID:").append(getId()).append("\n");
         for (Roda roda : getRodas()) {

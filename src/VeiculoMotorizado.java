@@ -1,25 +1,31 @@
 import java.util.Random;
 import java.util.Scanner;
+//VeiculoMotorizado é filho de Veiculo
 public abstract class VeiculoMotorizado extends Veiculo {
+    //Atributos nescessários
     private final float litToMorocicleta =0.25f;
     private final float litToCarro = 0.75f;
     private final float litToFerrari = 2.5f;
     private  static float combustivel;
-    private boolean Ipva;
+    private boolean ipva;
 
     public VeiculoMotorizado(){
+        //construtor inicializa com combustivel = 3.5
         Random random = new Random();
         combustivel=3.5f;
         int genIpva = random.nextInt(0,100);
 
         if(genIpva%2==0){
-            this.Ipva = true;
+            //inicializa com Ipva pago se for par
+            this.ipva = true;
+
         }else{
-            this.Ipva =false;
+            //Ipva não pago
+            this.ipva =false;
         }
 
     }
-
+    //getters e setters
     public float getCombustivel() {
 
         return combustivel;
@@ -46,14 +52,15 @@ public abstract class VeiculoMotorizado extends Veiculo {
     }
 
     public boolean isIpva() {
-        return Ipva;
+        return ipva;
     }
 
     public void setIpva(boolean ipva) {
-        Ipva = ipva;
+       this.ipva = ipva;
     }
 
     public static void  abastecer(){
+         //abasatece o veiculo
         Scanner sc = new Scanner(System.in);
         System.out.println("Digite o Id do veículo:");
         int combusId =sc.nextInt();
@@ -71,7 +78,7 @@ public abstract class VeiculoMotorizado extends Veiculo {
 
     }
     public String toString(){
-        return "Ipva pago?:"+Ipva;
+        return "Ipva pago?:"+ipva;
 
     }
 

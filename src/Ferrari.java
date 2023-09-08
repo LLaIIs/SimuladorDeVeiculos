@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 import java.util.List;
-
+//ferrari é filha do veiculoMotorizado e implementa ipva
 public class Ferrari extends  VeiculoMotorizado implements Ipva{
-    private int espacoAntes;
-    public Ferrari(){
+
+    public Ferrari(int espacoAntes){
+        //inicializa com 4 rodas
         setQuantRodas(4);
         List<Roda> rodas = new ArrayList<>();
 
@@ -12,10 +13,11 @@ public class Ferrari extends  VeiculoMotorizado implements Ipva{
         }
 
         setRodas(rodas);
-        espacoAntes=0;
+        setEspacoAntes(espacoAntes);
     }
     @Override
     public void mover() {
+        //move o veiculo
         float totalVal = getQuantBloco() * getLitToFerrari();
         boolean rodaDescalibrada = false;
 
@@ -30,7 +32,8 @@ public class Ferrari extends  VeiculoMotorizado implements Ipva{
             System.out.println("Não é possível locomover pois a(s) roda(s) não está(ão) calibrada(s)!");
         } else {
             if (getCombustivel() >= totalVal) {
-                espacoAntes++; // incrementa
+                int novoEspacoAntes = getEspacoAntes() + 1;
+                setEspacoAntes(novoEspacoAntes); // incrementa
                 setCombustivel(getCombustivel() - totalVal);
             } else {
                 System.out.println("Não é possível mover, combustível insuficiente");
@@ -41,8 +44,9 @@ public class Ferrari extends  VeiculoMotorizado implements Ipva{
 
     @Override
     public String desenhar() {
+        //desenha o veiculo
         setQuantBloco(10);
-        String espacos = " ".repeat(espacoAntes*getQuantBloco());//10 em 10 blocos
+        String espacos = " ".repeat(getEspacoAntes()*getQuantBloco());//10 em 10 blocos
         String ferrari = "" +
                 "\n"+espacos+"       __" +
                 "\n "+espacos+"    ~( @\\ \\" +
@@ -55,6 +59,7 @@ public class Ferrari extends  VeiculoMotorizado implements Ipva{
     }
     @Override
     public String toString() {
+        //print o as informações do veiculo
         StringBuilder sb = new StringBuilder();
         sb.append("Ferrari: ID:").append(getId()).append("\n");
         sb.append("Combustivel:").append(getCombustivel()).append("\n");
@@ -67,6 +72,7 @@ public class Ferrari extends  VeiculoMotorizado implements Ipva{
 
     @Override
     public double calcularIpva() {
+        //calcula o valor do ipva
 
         return valBase*valFerrari;
     }

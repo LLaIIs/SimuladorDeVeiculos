@@ -2,13 +2,26 @@ import java.util.List;
 import java.util.Random;
 
 public abstract class  Veiculo {
+    //Atributos nescessários
     private int id;
     private int quantBloco;
     private  List<Roda> rodas;
     private int quantRodas;
+    private int espacoAntes;
     public Veiculo(){
+        //Construtor de veículos inicializa com id
+
         Random random = new Random();
         id = random.nextInt(200,900);
+    }
+
+    // geters e setters dos atributos
+    public int getEspacoAntes() {
+        return espacoAntes;
+    }
+
+    public void setEspacoAntes(int espacoAntes) {
+        this.espacoAntes = espacoAntes;
     }
 
     public int getId() {
@@ -44,9 +57,10 @@ public abstract class  Veiculo {
         this.rodas = rodas;
     }
 
-    public abstract void mover();
-    public abstract String desenhar();
+    public abstract void mover();//metodo abstrato mover
+    public abstract String desenhar();//metodo abstrato desenhar
     public void calibraPneu() {
+        //metodo calibra pneu por  tipo
         for (Roda pneu : rodas) {
             if (!pneu.isCalibragem()) {
                 System.out.println("Calibrando pneu " + pneu.getNum() + "...");
@@ -58,6 +72,7 @@ public abstract class  Veiculo {
         }
     }
     public void  calibraPneu(int numPneu) {
+        //calibra pneu por id
         for (Roda pneu : rodas) {
             if(pneu.getNum() == numPneu) {
                 if (!pneu.isCalibragem()) {
@@ -73,9 +88,6 @@ public abstract class  Veiculo {
         System.out.println("Pneu "+numPneu +" inválido!");
     }
 
-    /*public String toString(){
-
-
-    }*/
+    public abstract String toString();//metodo abstrato toString
 
 }
